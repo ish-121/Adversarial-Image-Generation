@@ -1,7 +1,7 @@
 import os
 from model import loadModel
 from image_utils import preprocessImage, saveAdversarialImage
-from adversarial_utils import generateAdversarialImage
+from adversarial_utils import generateAdversarialImagePGD
 from classification import classifyImage
 
 def selectUserImage(folder_path="images"):
@@ -30,7 +30,7 @@ def main():
         print(f"Rank {rank}: Class {class_id} with confidence {confidence*100:.2f}%")
 
     # Generate adversarial image
-    input_batch_adv = generateAdversarialImage(model, input_batch, target_class)
+    input_batch_adv = generateAdversarialImagePGD(model, input_batch, target_class)
     adv_image_path = saveAdversarialImage(input_batch_adv, image_path)
 
     # Classify adversarial image
