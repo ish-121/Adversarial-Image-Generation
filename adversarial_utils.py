@@ -1,6 +1,6 @@
 import torch
 
-def generateAdversarialImagePGD(model, input_batch, target_class, epsilon=0.001, num_steps=20, alpha=0.003):
+def generateAdversarialImagePGD(model, input_batch, target_class, epsilon=0.001, num_steps=20, alpha=0.001):
     """
     Generate an adversarial image by applying perturbations to the input image using Projected Gradient Descent (PGD) method.
     """

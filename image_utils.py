@@ -12,13 +12,13 @@ def preprocessImage(image_path, model_weights):
     input_batch = input_tensor.unsqueeze(0)  # Convert to a mini-batch as expected by the model.
     return input_batch
 
-def saveAdversarialImage(input_batch_adv, original_image_path,num_steps, epsilon, alpha):
+def saveAdversarialImage(input_batch_adv, original_image_path, target_class):
     """
     Save the adversarial image to the filesystem.
     """
     adv_image = transforms.ToPILImage()(input_batch_adv.squeeze())
     original_image_name = os.path.basename(original_image_path)
-    adv_image_name = f"adv_{original_image_name}_steps{num_steps}_eps{epsilon}_alpha{alpha}.png"
+    adv_image_name = f"adv_{original_image_name}_{target_class}.png"
     adv_image_path = os.path.join("adv_images", adv_image_name)
     adv_image.save(adv_image_path)
     return adv_image_path
