@@ -1,11 +1,11 @@
 import os
 import pandas as pd
 from model import loadModel
-from image_utils import preprocessImage, saveAdversarialImage
-from adversarial_utils import generateAdversarialImagePGD
-from classification import classifyImage
+from utils.image_utils import preprocessImage, saveAdversarialImage
+from utils.adversarial_utils import generateAdversarialImagePGD
+from utils.classification import classifyImage
 
-def load_class_names(excel_path="classes.xlsx"):
+def load_class_names(excel_path="utils/classes.xlsx"):
     """
     Load class names from an Excel file and return a dictionary mapping class IDs to class names.
     """
