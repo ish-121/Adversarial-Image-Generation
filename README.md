@@ -93,8 +93,7 @@ The opposing force here could be that, as per the ImageNet 1000 class list, ther
 Note that the generated adversarial images appear to be distorted into a square shape with harsher colours and look more pixelated. A highly human-perceptible change. Strictly speaking however, the differences between adversarial images themselves are imperceptible, i.e. all the noise appears to be the same. So, the distortions may simply be due to the transformations the image has to go through in order to be formulated correctly in the network, but this is not for certain and would require further investigation.
 
 ![Figure 1: Original German Shepherd](images/dog1.jpg)
-![Figure 2: Adversarial German Shepherd Example 1](adv_images/dog1.jpg_282.png)
-![Figure 3: Adversarial German Shepherd Example 2](adv_images/adv_dog1.jpg_283.png)
+![Figure 2: Adversarial German Shepherd Example](adv_images/adv_dog1.jpg_283.png)
 
 The algorithm was also directly tested against the vision transformer vit_b_16. Below are the results for the model in Table 2, as well as a general discussion on the attack and comparison between models.
 
