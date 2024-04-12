@@ -36,24 +36,25 @@ The crux of the adversarial generation is an algorithm which uses the PGD techni
 
 Below is the pseudocode outline for the PGD algorithm:
 
-**_function generateAdversarialImage(model, input, target, epsilon, steps, alpha):
-    # Add random noise within epsilon range
-    adv_input += random_noise(epsilon)
-    make sure adv_input is a valid image
+    function generateAdversarialImage(model, input, target, epsilon, steps, alpha):
+        # Add random noise within epsilon range
+        adv_input += random_noise(epsilon)
+        make sure adv_input is a valid image
+        
+        repeat steps amount of times:
+            # Get model adversarial image output, and compute the loss
+            output = model(adv_input)
+            loss = CrossEntropyLoss(output, target)
+            compute gradients
+            
+            # Update adv_input based on gradients
+            adv_input += alpha * sign(gradients)
+            
+            # Keep perturbations within epsilon range
+            perturbation = limit(adv_input - input, -epsilon, epsilon)
+            adv_input = limit(input + perturbation, 0, 1)
+    return adv_input
     
-    repeat steps amount of times:
-        # Get model adversarial image output, and compute the loss
-        output = model(adv_input)
-        loss = CrossEntropyLoss(output, target)
-        compute gradients
-        
-        # Update adv_input based on gradients
-        adv_input += alpha * sign(gradients)
-        
-        # Keep perturbations within epsilon range
-        perturbation = limit(adv_input - input, -epsilon, epsilon)
-        adv_input = limit(input + perturbation, 0, 1)
-    return adv_input_**
 Where epsilon controls the magnitude of the perturbation, limiting how much the pixels can change by, and alpha determines the step size in each iteration, meaning that a larger alpha can lead to faster convergence but may then overshoot the optimal perturbation. These hyperparameters were fine tuned for VGG-13.
 
 In terms of evaluation, every dog image has had an adversarial image generated for every category of cat that has been specified. Then top 3 originally classified categories as well as the top 3 adversarial categories are generated, as well as the confidence in each prediction. I have randomly picked 4 categories of dog from the 1000 class list, and found appropriate pictures online. The original dog images/classes are: 235 - german shepherd, 254 - pug, 180 - staffordshire terrier, and 151 - chihuahua. Similarly, the 4 categories of cat (of which there are very few to choose from) from the 1000 class list are: 282 - tiger cat, 283 - persian cat, 284 - siamese, and 285 - egyptian cat. This results in a total of 16 adversarial images per model tested.
