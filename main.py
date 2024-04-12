@@ -14,6 +14,9 @@ def load_class_names(excel_path="utils/classes.xlsx"):
     return class_names_dict
 
 def collect_results(image_name, target_class, class_names, original_preds, adv_preds, adv_image_path):
+    """
+    Collates all the results together to be in a more report-ready format
+    """
     # Get the target class name
     target_class_name = class_names.get(target_class, "Unknown class")
     
